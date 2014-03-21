@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+        <RadioButton
+            android:id="@+id/id_company_info_button"
+            android:text="@string/project_info"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton
+            android:id="@+id/id_sales_mission_button"
+            android:layout_weight="1"
+            android:text="@string/sales_mission"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+    <ListView
+        android:id="@+id/id_member_special_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
