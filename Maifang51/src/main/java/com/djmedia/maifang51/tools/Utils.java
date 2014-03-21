@@ -20,11 +20,19 @@ public class Utils {
         return userOnLine;
     }
 
-    public static void saveUserOnLine(Context context) {
+    public static void makeUserOnLine(Context context) {
         if (context != null) {
             SharedPreferences preferences = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
             preferences.edit().putBoolean(Constants.USER_ON_LINE, true).commit();
-            Log.d(TAG, "save user on line succeed");
+            Log.d(TAG, "make user Online success.");
+        }
+    }
+
+    public static void makeUserOffLine(Context context) {
+        if (context != null) {
+            SharedPreferences preferences = context.getSharedPreferences(Constants.PREF_NAME, Context.MODE_PRIVATE);
+            preferences.edit().putBoolean(Constants.USER_ON_LINE, false).commit();
+            Log.d(TAG, "make user OFF line success.");
         }
     }
 }

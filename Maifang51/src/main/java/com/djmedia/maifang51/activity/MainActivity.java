@@ -1,33 +1,28 @@
 package com.djmedia.maifang51.activity;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.TabHost;
-import android.widget.TabWidget;
-import android.widget.TextView;
+import android.widget.RadioGroup;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.fragment.ApartmentListFragment;
+import com.djmedia.maifang51.fragment.CloudPhoneFragment;
 import com.djmedia.maifang51.fragment.LoginFragment;
 import com.djmedia.maifang51.fragment.MainFragment;
 import com.djmedia.maifang51.fragment.MemberCenterFragment;
 import com.djmedia.maifang51.fragment.MemberSpecialFragment;
 import com.djmedia.maifang51.fragment.MoreFragment;
+import com.djmedia.maifang51.tools.FID;
 import com.djmedia.maifang51.tools.Utils;
 
 import java.util.ArrayList;
@@ -35,9 +30,11 @@ import java.util.List;
 
 public class MainActivity extends ActionBarActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-    private FragmentTabHost mTabHost;
     private PopupWindow mPopupWindow;
     private List<Fragment> mFragmentList = new ArrayList<Fragment>();
+    private RadioGroup tabRadioGroup;
+
+    private int currentIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,94 +43,97 @@ public class MainActivity extends ActionBarActivity {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setProgressBarIndeterminateVisibility(false);
 
+        setContentView(R.layout.activity_main);
+
         createTab(savedInstanceState);
+        createPopupWindow(savedInstanceState);
     }
 
-    private View getTabView(int drawableId, int stringId) {
-        View tabIndicator = getLayoutInflater().inflate(R.layout.tab_indicator, mTabHost, false);
+    private void createPopupWindow(Bundle savedInstanceState) {
+        View dialogView = getLayoutInflater().inflate(R.layout.popup_buttons, null);
+        mPopupWindow = new PopupWindow(dialogView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
+        mPopupWindow.setTouchable(true);
+        mPopupWindow.setOutsideTouchable(true);
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
+    }
 
-        ImageView tabImage = (ImageView) tabIndicator.findViewById(R.id.id_tab_icon);
-        tabImage.setImageResource(drawableId);
+    public void checkTag(int tabIndex) {
+        int lastIndex = currentIndex;
 
-        TextView tabLabel = (TextView) tabIndicator.findViewById(R.id.id_tab_label);
-        tabLabel.setText(stringId);
+        ((RadioButton) tabRadioGroup.getChildAt(tabIndex)).setChecked(true);
+        currentIndex = tabIndex;
 
-        return tabIndicator;
+        refreshFragment(lastIndex);
     }
 
     private void createTab(Bundle bundle) {
-        setContentView(R.layout.activity_main);
+        mFragmentList.add(FID.MAIN.getId(), new MainFragment());
+        mFragmentList.add(FID.APARTMENT_LIST.getId(), new ApartmentListFragment());
+        mFragmentList.add(FID.LOGIN.getId(), new LoginFragment());
+        mFragmentList.add(FID.CLOUD_PHONE.getId(), new CloudPhoneFragment());
+        mFragmentList.add(FID.MORE.getId(), new MoreFragment());
+        mFragmentList.add(FID.MEMBER_CENTER.getId(), new MemberCenterFragment());
+        mFragmentList.add(FID.MEMBER_SPECIAL.getId(), new MemberSpecialFragment());
 
-        mTabHost = (FragmentTabHost) findViewById(R.id.id_tab_host);
-        mTabHost.setup(this, getSupportFragmentManager(), R.id.id_main_fragment);
+        tabRadioGroup = (RadioGroup) findViewById(R.id.id_radio_group);
+        checkTag(0); // you need to check one first before listen.
 
-        TabHost.TabSpec tab1 = mTabHost.newTabSpec("tab1").setIndicator(getTabView(R.drawable.button_index, R.string.index));
-        TabHost.TabSpec tab2 = mTabHost.newTabSpec("tab2").setIndicator(getTabView(R.drawable.button_apartment, R.string.looking_for_apartment));
-        TabHost.TabSpec tab3 = mTabHost.newTabSpec("tab3").setIndicator(getTabView(R.drawable.button_member_center, R.string.member_center));
-        TabHost.TabSpec tab4 = mTabHost.newTabSpec("tab4").setIndicator(getTabView(R.drawable.button_cloud_phone, R.string.cloud_phone));
-        TabHost.TabSpec tab5 = mTabHost.newTabSpec("tab5").setIndicator(getTabView(R.drawable.button_more, R.string.more));
-
-        mTabHost.addTab(tab1, MainFragment.class, bundle);
-        mTabHost.addTab(tab2, ApartmentListFragment.class, bundle);
-        mTabHost.addTab(tab3, LoginFragment.class, bundle);
-//        mTabHost.addTab(tab3, MemberCenterFragment.class, bundle);
-        mTabHost.addTab(tab4, MemberSpecialFragment.class, bundle);
-//        mTabHost.addTab(tab4, CloudPhoneFragment.class, bundle);
-        mTabHost.addTab(tab5, MoreFragment.class, bundle);
-
-        // resize width of each tab widget
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        windowManager.getDefaultDisplay().getMetrics(displayMetrics);
-        int screeWidth = displayMetrics.widthPixels;
-
-        TabWidget tabWidget = mTabHost.getTabWidget();
-        int count = tabWidget.getTabCount();
-        for (int i = 0; i < count; i++) {
-            tabWidget.getChildAt(i).getLayoutParams().width = screeWidth / count;
-        }
-
-        View dialogView = getLayoutInflater().inflate(R.layout.popup_buttons, null);
-        mPopupWindow = new PopupWindow(dialogView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-//        mPopupWindow.setTouchable(true);
-//        mPopupWindow.setOutsideTouchable(true);
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
-
-        mTabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+        tabRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onTabChanged(String selectedTab) {
-                Log.d(TAG, "tab changed:" + selectedTab);
-                if ("tab1".equals(selectedTab)) {
-                    mPopupWindow.showAsDropDown(mTabHost.getCurrentTabView(), -10, 10);
-                } else if ("tab3".equals(selectedTab)) {
-                    boolean userOnLine = Utils.isUserOnLine(MainActivity.this);
-                    Log.d(TAG, "userOnLine: " + userOnLine);
-                    if (userOnLine) {
-                        FragmentManager manager = MainActivity.this.getSupportFragmentManager();
-                        manager.beginTransaction().
-                                replace(R.id.id_main_fragment, new MemberCenterFragment()).commit();
+            public void onCheckedChanged(RadioGroup radioGroup, int selectedId) {
+                Log.d(TAG, "onCheckedChanged called. count: " + radioGroup.getChildCount() + " selectedId: " + selectedId);
+
+                int lastIndex = currentIndex;
+
+                for (int i = 0; i < radioGroup.getChildCount(); i++) {
+                    if (radioGroup.getChildAt(i).getId() == selectedId) {
+                        currentIndex = i;
+                        break;
                     }
                 }
+                Log.d(TAG, "lastIndex: " + lastIndex + " currentIndex: " + currentIndex);
+
+                refreshFragment(lastIndex);
             }
         });
+
     }
 
-    public void onRadioButtonClicked(View view) {
-        boolean checked = ((RadioButton) view).isChecked();
-        switch (view.getId()) {
-            case R.id.id_company_info_button:
-                if (checked) {
-
-                }
-                break;
-            case R.id.id_sales_mission_button:
-                if (checked) {
-
-
-                }
-                break;
-            default:
-                throw new UnsupportedOperationException();
+    private void refreshFragment(int lastIndex) {
+        if (Utils.isUserOnLine(MainActivity.this)) {
+            if (currentIndex == FID.LOGIN.getId()) {
+                currentIndex = FID.MEMBER_CENTER.getId();
+            } else if (currentIndex == FID.CLOUD_PHONE.getId()) {
+                currentIndex = FID.MEMBER_SPECIAL.getId();
+            }
         }
+
+        FragmentTransaction transaction = getFragmentTransaction(lastIndex);
+
+        if (lastIndex != -1) {
+            Fragment lastFragment = mFragmentList.get(lastIndex);
+            lastFragment.onPause();
+            transaction.hide(lastFragment);
+        }
+
+        Fragment fragment = mFragmentList.get(currentIndex);
+        if (fragment.isAdded()) {
+            fragment.onResume();
+        } else {
+            transaction.add(R.id.id_main_fragment, fragment);
+        }
+        transaction.show(fragment);
+
+        transaction.commit();
+    }
+
+    private FragmentTransaction getFragmentTransaction(int lastIndex){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        if (lastIndex < currentIndex) {
+            ft.setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out);
+        } else {
+            ft.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out);
+        }
+        return ft;
     }
 }

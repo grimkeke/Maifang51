@@ -4,5 +4,6 @@
     <item android:state_focused="true" android:drawable="@drawable/main_index_apartment_pressed" />
     <item android:state_selected="true" android:drawable="@drawable/main_index_apartment_pressed" />
     <item android:state_pressed="true" android:drawable="@drawable/main_index_apartment_pressed" />
+    <item android:state_checked="true" android:drawable="@drawable/main_index_apartment_pressed" />
     <item android:drawable="@drawable/main_index_apartment_normal" />
 </selector>

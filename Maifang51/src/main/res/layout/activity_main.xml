@@ -8,8 +8,52 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
-    <android.support.v4.app.FragmentTabHost
-        android:id="@+id/id_tab_host"
+    <RadioGroup
+        android:id="@+id/id_radio_group"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:text="@string/index"
+            android:button="@null"
+            android:drawableTop="@drawable/button_index"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="@string/looking_for_apartment"
+            android:button="@null"
+            android:drawableTop="@drawable/button_apartment"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="@string/member_center"
+            android:button="@null"
+            android:drawableTop="@drawable/button_member_center"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="@string/cloud_phone"
+            android:button="@null"
+            android:drawableTop="@drawable/button_cloud_phone"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:text="@string/more"
+            android:button="@null"
+            android:drawableTop="@drawable/button_more"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 </LinearLayout>

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.InfoDetailActivity;
 import com.djmedia.maifang51.tools.Constants;
+import com.djmedia.maifang51.tools.Utils;
 
 /**
  * Created by rd on 14-3-15.
@@ -63,6 +64,7 @@ public class MemberCenterFragment extends Fragment {
         remainderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Utils.makeUserOffLine(getActivity());
                 startDetailActivity(3);
             }
         });

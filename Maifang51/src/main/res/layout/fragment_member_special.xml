@@ -15,15 +15,13 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:checked="true"
-            android:onClick="onRadioButtonClicked"/>
+            android:checked="true" />
         <RadioButton
             android:id="@+id/id_sales_mission_button"
             android:layout_weight="1"
             android:text="@string/sales_mission"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="onRadioButtonClicked"/>
+            android:layout_height="match_parent" />
     </RadioGroup>
     <ListView
         android:id="@+id/id_member_special_list_view"
