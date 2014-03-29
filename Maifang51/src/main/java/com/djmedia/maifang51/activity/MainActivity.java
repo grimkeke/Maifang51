@@ -58,15 +58,11 @@ public class MainActivity extends BaseActivity {
         mPopupWindow.setBackgroundDrawable(new BitmapDrawable(getResources(), (Bitmap) null));
     }
 
-    public void checkTag(int tabIndex) {
+    public void checkTagAndRefresh(int tabIndex) {
         Log.d(TAG, "currentIndex: " + currentIndex + " currentFragmentIndex: " +
                 currentFragmentIndex + " checkedIndex: " + tabIndex);
 
         ((RadioButton) tabRadioGroup.getChildAt(tabIndex)).setChecked(true);
-    }
-
-    public void checkTagAndRefresh(int tabIndex) {
-        checkTag(tabIndex);
         refreshFragment(tabIndex);
     }
 

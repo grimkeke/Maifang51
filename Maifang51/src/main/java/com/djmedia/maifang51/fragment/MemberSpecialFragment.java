@@ -6,11 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.RadioGroup;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.InfoDetailActivity;
 import com.djmedia.maifang51.adapter.InfoAdapter;
 import com.djmedia.maifang51.tools.Constants;
+
+import junit.framework.Assert;
 
 import org.json.JSONArray;
 
@@ -19,6 +22,8 @@ import org.json.JSONArray;
  */
 public class MemberSpecialFragment extends ObjListFragment {
     private static final String TAG = MemberSpecialFragment.class.getSimpleName();
+    private RadioGroup radioGroup;
+    private int infoType = Constants.TYPE_BIZ_INFO;
 
     public MemberSpecialFragment() {
     }
@@ -26,6 +31,29 @@ public class MemberSpecialFragment extends ObjListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_member_special, container, false);
+        radioGroup = (RadioGroup) view.findViewById(R.id.id_member_special_radio_group);
+        radioGroup.check(radioGroup.getChildAt(0).getId());
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                int checkdIndex = -1;
+                for (int i = 0; i < group.getChildCount(); i++) {
+                    if (group.getChildAt(i).getId() == checkedId) {
+                        checkdIndex = i;
+                        break;
+                    }
+                }
+                Assert.assertTrue(checkdIndex != -1);
+
+                if (checkdIndex == 0) {
+                    infoType = Constants.TYPE_BIZ_INFO;
+                } else if (checkdIndex == 1) {
+                    infoType = Constants.TYPE_SALES_MISSION;
+                } else {
+                    Assert.assertTrue(false);
+                }
+            }
+        });
         return view;
     }
 
@@ -45,7 +73,7 @@ public class MemberSpecialFragment extends ObjListFragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
-                intent.putExtra(Constants.DETAIL_TYPE, Constants.TYPE_INFO_DETAIL);
+                intent.putExtra(Constants.DETAIL_TYPE, infoType);
                 intent.putExtra(Constants.INFO_ID, "111111");
                 startActivity(intent);
             }

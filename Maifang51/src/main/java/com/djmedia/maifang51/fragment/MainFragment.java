@@ -109,7 +109,7 @@ public class MainFragment extends Fragment {
                     intent.putExtra(Constants.LIST_TYPE, Constants.TYPE_MEMBER_SPECIAL);
                     startActivity(intent);
                 } else {
-                    ((MainActivity) getActivity()).checkTag(Constants.MEMBER_CENTER); // listener will auto refresh.
+                    ((MainActivity) getActivity()).checkTagAndRefresh(Constants.MEMBER_CENTER); // listener will auto refresh.
                 }
             }
         });

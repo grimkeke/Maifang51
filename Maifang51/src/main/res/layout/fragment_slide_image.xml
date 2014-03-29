@@ -12,7 +12,7 @@
     <RadioGroup
         android:id="@+id/id_top_page"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/id_view_flipper"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="1dp"
@@ -23,7 +23,7 @@
         android:ellipsize="end"
         android:gravity="center_vertical|left"
         android:layout_toLeftOf="@id/id_top_page"
-        android:layout_alignParentBottom="true"
+        android:layout_alignBottom="@id/id_view_flipper"
         android:padding="1dp"
         android:textSize="14dp"
         android:layout_width="match_parent"

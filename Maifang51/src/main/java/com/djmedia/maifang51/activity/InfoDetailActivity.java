@@ -8,10 +8,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.djmedia.maifang51.R;
+import com.djmedia.maifang51.fragment.BizInfoFragment;
+import com.djmedia.maifang51.fragment.InfoDetailFragment;
+import com.djmedia.maifang51.fragment.SalesMissionFragment;
 import com.djmedia.maifang51.fragment.SearchApartmentFragment;
 import com.djmedia.maifang51.fragment.CalculatorFragment;
 import com.djmedia.maifang51.fragment.CommunityFragment;
-import com.djmedia.maifang51.fragment.InfoDetailFragment;
 import com.djmedia.maifang51.fragment.MapFragment;
 import com.djmedia.maifang51.fragment.MemberSpecialFragment;
 import com.djmedia.maifang51.fragment.MineProjectFragment;
@@ -62,6 +64,14 @@ public class InfoDetailActivity extends BaseActivity {
                 break;
             case Constants.TYPE_INFO_DETAIL:
                 fragment = new InfoDetailFragment();
+                fragment.setArguments(getIntent().getExtras());
+                break;
+            case Constants.TYPE_BIZ_INFO:
+                fragment = new BizInfoFragment();
+                fragment.setArguments(getIntent().getExtras());
+                break;
+            case Constants.TYPE_SALES_MISSION:
+                fragment = new SalesMissionFragment();
                 fragment.setArguments(getIntent().getExtras());
                 break;
             default:

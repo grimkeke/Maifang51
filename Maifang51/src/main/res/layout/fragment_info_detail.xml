@@ -1,32 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/id_project_name"
+    <fragment
+        android:name="com.djmedia.maifang51.fragment.SlideImageFragment"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
-    <TextView
-        android:id="@+id/id_project_time"
+        android:layout_height="wrap_content"/>
+    <TextView android:id="@+id/detail_title"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
+        android:layout_height="wrap_content" />
     <TextView
-        android:id="@+id/id_project_client"
+        android:id="@+id/detail_author"
         android:layout_width="match_parent"
-        android:layout_height="60dp" />
-    <TextView
-        android:id="@+id/id_project_expire"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-    <TextView
-        android:id="@+id/id_project_goal"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
-    <TextView
-        android:id="@+id/id_project_description"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
+        android:layout_height="wrap_content" />
 </LinearLayout>
