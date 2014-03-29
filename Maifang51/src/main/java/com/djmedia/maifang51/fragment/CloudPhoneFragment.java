@@ -27,4 +27,10 @@ public class CloudPhoneFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(getString(R.string.cloud_phone));
+    }
 }

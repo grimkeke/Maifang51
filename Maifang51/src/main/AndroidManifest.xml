@@ -2,7 +2,28 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.djmedia.maifang51" >
 
+
+    <!--使用网络功能所需权限  -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+
+    <!-- SDK离线地图和cache功能需要读写外部存储器 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <!-- 获取设置信息和详情页直接拨打电话需要以下权限  -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <!-- 定位功能 -->
+    <permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BAIDU_LOCATION_SERVICE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_GPS"/>
+
 
     <application android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -15,7 +36,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
 
@@ -32,9 +52,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.InfoDetailActivity"
-            android:parentActivityName=".activity.MainActivity">
-            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".MainActivity" />
-            </activity>
+        <activity android:name=".activity.InfoDetailActivity">
+        </activity>
+
+        <activity android:name=".activity.InfoListActivity">
+        </activity>
+
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote" />
     </application>
 </manifest>

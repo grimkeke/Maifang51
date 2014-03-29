@@ -51,7 +51,7 @@ public class JSONAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup parent) {
         ViewHolder holder = null;
         if (view == null) {
-            view = mInflater.inflate(R.layout.fragment_apartment_list_item, null);
+            view = mInflater.inflate(R.layout.obj_list_item, null);
 
             holder = new ViewHolder();
             holder.thumbnailImageView = (ImageView) view.findViewById(R.id.img_thumbnail);

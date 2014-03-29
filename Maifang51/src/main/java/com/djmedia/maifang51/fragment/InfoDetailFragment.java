@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.djmedia.maifang51.R;
+import com.djmedia.maifang51.tools.Constants;
 
 /**
  * Created by rd on 14-3-20.
@@ -33,6 +34,8 @@ public class InfoDetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        String infoId = getArguments().getString(Constants.INFO_ID);
+
         nameTextView = (TextView) getActivity().findViewById(R.id.id_project_name);
         timeTextView = (TextView) getActivity().findViewById(R.id.id_project_time);
         clientTextView = (TextView) getActivity().findViewById(R.id.id_project_client);
@@ -44,6 +47,6 @@ public class InfoDetailFragment extends Fragment {
         clientTextView.setText("客户名称： " + "万科");
         expireTextView.setText("项目截止日期： " + "2014-04-22");
         goalTextView.setText("项目指标： " + "10000万");
-        descriptionTextView.setText("项目描述： " + "万科梦想园XXXXXXXXXXXXXXX");
+        descriptionTextView.setText("项目描述： " + "万科梦想园XXXXXXXXXXXXXXX" + " infoId: " + infoId);
     }
 }

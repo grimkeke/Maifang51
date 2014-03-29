@@ -1,5 +1,6 @@
 package com.djmedia.maifang51.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -9,14 +10,19 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.ViewFlipper;
 
 import com.djmedia.maifang51.R;
+import com.djmedia.maifang51.activity.InfoListActivity;
+import com.djmedia.maifang51.activity.MainActivity;
+import com.djmedia.maifang51.tools.Constants;
+import com.djmedia.maifang51.tools.Utils;
 
-public class MainFragment extends Fragment implements View.OnTouchListener {
+public class MainFragment extends Fragment {
     private static final String TAG = MainFragment.class.getSimpleName();
     private ViewFlipper mViewFlipper;
     private int[] imageResId;
@@ -30,42 +36,83 @@ public class MainFragment extends Fragment implements View.OnTouchListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mViewFlipper = (ViewFlipper) view.findViewById(R.id.id_view_flipper);
-
         mTopPage = (RadioGroup) view.findViewById(R.id.id_top_page);
         imageResId = new int[] {R.drawable.img0, R.drawable.img1, R.drawable.img2, R.drawable.img3, R.drawable.img4};
-        mViewFlipper.setOnTouchListener(this);
+
+        mViewFlipper = (ViewFlipper) view.findViewById(R.id.id_view_flipper);
+        mViewFlipper.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mDx = motionEvent.getX();
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        float newX = motionEvent.getX();
+                        float diffX = newX - mDx;
+                        mDx = 0.0f;
+                        if (diffX > 0) {
+                            showPrev();
+                        } else {
+                            showNext();
+                        }
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(getString(R.string.index));
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        showSlideImages();
-    }
 
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mDx = motionEvent.getX();
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                return true;
-            case MotionEvent.ACTION_UP:
-                float newX = motionEvent.getX();
-                float diffX = newX - mDx;
-                mDx = 0.0f;
-                if (diffX > 0) {
-                    showPrev();
+        showSlideImages();
+
+        Button mNewsButton = (Button) getActivity().findViewById(R.id.id_news_button);
+        mNewsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), InfoListActivity.class);
+                intent.putExtra(Constants.LIST_TYPE, Constants.TYPE_APARTMENT_NEWS);
+                startActivity(intent);
+            }
+        });
+
+        Button mInfoButton = (Button) getActivity().findViewById(R.id.id_info_button);
+        mInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), InfoListActivity.class);
+                intent.putExtra(Constants.LIST_TYPE, Constants.TYPE_MARKET_INFO);
+                startActivity(intent);
+            }
+        });
+
+        Button mSpecialButton = (Button) getActivity().findViewById(R.id.id_special_button);
+        mSpecialButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utils.isUserOnLine(getActivity())) {
+                    Intent intent = new Intent(getActivity(), InfoListActivity.class);
+                    intent.putExtra(Constants.LIST_TYPE, Constants.TYPE_MEMBER_SPECIAL);
+                    startActivity(intent);
                 } else {
-                    showNext();
+                    ((MainActivity) getActivity()).checkTag(Constants.MEMBER_CENTER); // listener will auto refresh.
                 }
-                return true;
-            default:
-                break;
-        }
-        return false;
+            }
+        });
     }
 
     private void showSlideImages() {
@@ -94,6 +141,14 @@ public class MainFragment extends Fragment implements View.OnTouchListener {
         changeShowNextBanner(0);
     }
 
+    private void changeShowNextBanner(int postion) {
+        RadioButton radioButton = (RadioButton) mTopPage.getChildAt(postion);
+        if (radioButton == null) {
+            return ;
+        }
+        radioButton.setChecked(true);
+    }
+
     private void showNext() {
         if (mViewFlipper.getChildCount() <= 1) {
             return ;
@@ -118,11 +173,4 @@ public class MainFragment extends Fragment implements View.OnTouchListener {
         changeShowNextBanner(mViewFlipper.getDisplayedChild());
     }
 
-    private void changeShowNextBanner(int postion) {
-        RadioButton radioButton = (RadioButton) mTopPage.getChildAt(postion);
-        if (radioButton == null) {
-            return ;
-        }
-        radioButton.setChecked(true);
-    }
 }

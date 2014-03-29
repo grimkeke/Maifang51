@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Maifang51" />
+            <option value="D:\Workspaces\androidWorkspace\Maifang51" />
+            <option value="D:\Workspaces\androidWorkspace\Maifang51\Maifang51" />
           </set>
         </option>
       </GradleProjectSettings>

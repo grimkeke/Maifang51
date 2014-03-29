@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/id_map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true" />
+    <Button android:id="@+id/id_locate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:text="定位" />
+    <Button
+        android:id="@+id/id_public_trafic_button"
+        android:text="公交"
+        android:layout_below="@id/id_locate_button"
+        android:layout_alignRight="@id/id_locate_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/id_drive_button"
+        android:text="开车"
+        android:layout_below="@id/id_public_trafic_button"
+        android:layout_alignRight="@id/id_public_trafic_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/id_walk_button"
+        android:text="步行"
+        android:layout_below="@id/id_drive_button"
+        android:layout_alignRight="@id/id_drive_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="10dip"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_centerVertical="false" >
+
+        <Button
+            android:id="@+id/pre"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/pre_"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip" />
+        <Button
+            android:id="@+id/next"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/next_"
+            android:layout_marginLeft="2dip"
+            android:layout_marginRight="2dip" />
+
+    </LinearLayout>
+</RelativeLayout>

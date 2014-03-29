@@ -5,7 +5,7 @@ import android.test.InstrumentationTestCase;
 /**
  * Created by rd on 14-3-16.
  */
-public class ApartmentListFragmentTest extends InstrumentationTestCase {
+public class SearchApartmentFragmentTest extends InstrumentationTestCase {
     /**
      * All test methods MUST start with the “test-” prefix or
      * Android Studio will not detect them as tests and

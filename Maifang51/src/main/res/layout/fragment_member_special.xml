@@ -24,7 +24,7 @@
             android:layout_height="match_parent" />
     </RadioGroup>
     <ListView
-        android:id="@+id/id_member_special_list_view"
+        android:id="@+id/id_main_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

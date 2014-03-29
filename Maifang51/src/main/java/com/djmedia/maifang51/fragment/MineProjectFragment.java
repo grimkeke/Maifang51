@@ -24,5 +24,6 @@ public class MineProjectFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getActivity().getActionBar().setTitle(getString(R.string.mine_project));
     }
 }

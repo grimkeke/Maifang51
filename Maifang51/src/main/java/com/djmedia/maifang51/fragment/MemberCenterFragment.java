@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.InfoDetailActivity;
+import com.djmedia.maifang51.activity.MainActivity;
 import com.djmedia.maifang51.tools.Constants;
 import com.djmedia.maifang51.tools.Utils;
 
@@ -35,6 +37,12 @@ public class MemberCenterFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(getString(R.string.member_center));
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -48,7 +56,7 @@ public class MemberCenterFragment extends Fragment {
         mineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startDetailActivity(1);
+                startDetailActivity(Constants.TYPE_MINE_PROJECT);
             }
         });
 
@@ -56,7 +64,7 @@ public class MemberCenterFragment extends Fragment {
         mailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startDetailActivity(2);
+                startDetailActivity(Constants.TYPE_SPECIAL);
             }
         });
 
@@ -64,8 +72,16 @@ public class MemberCenterFragment extends Fragment {
         remainderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                startDetailActivity(Constants.TYPE_REMIND);
+            }
+        });
+
+        getActivity().findViewById(R.id.id_logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Utils.makeUserOffLine(getActivity());
-                startDetailActivity(3);
+                ((MainActivity) getActivity()).checkTagAndRefresh(Constants.MEMBER_CENTER);
+                Toast.makeText(getActivity(), "logout success", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -75,5 +91,4 @@ public class MemberCenterFragment extends Fragment {
         intent.putExtra(Constants.DETAIL_TYPE, type);
         startActivity(intent);
     }
-
 }

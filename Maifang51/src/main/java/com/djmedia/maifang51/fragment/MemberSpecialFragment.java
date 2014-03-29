@@ -2,12 +2,10 @@ package com.djmedia.maifang51.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.InfoDetailActivity;
@@ -19,11 +17,8 @@ import org.json.JSONArray;
 /**
  * Created by rd on 14-3-20.
  */
-public class MemberSpecialFragment extends Fragment {
+public class MemberSpecialFragment extends ObjListFragment {
     private static final String TAG = MemberSpecialFragment.class.getSimpleName();
-    private String item_url = "http://www.google.com";
-    private ListView mListView;
-    private InfoAdapter infoAdapter;
 
     public MemberSpecialFragment() {
     }
@@ -35,20 +30,27 @@ public class MemberSpecialFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(getString(R.string.member_special));
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mListView = (ListView) getActivity().findViewById(R.id.id_member_special_list_view);
-        infoAdapter = new InfoAdapter(getActivity(), getActivity().getLayoutInflater(), item_url);
-        mListView.setAdapter(infoAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        InfoAdapter infoAdapter = new InfoAdapter(getActivity(), getActivity().getLayoutInflater(), item_url);
+        mainListView.setAdapter(infoAdapter);
+        mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
+                intent.putExtra(Constants.DETAIL_TYPE, Constants.TYPE_INFO_DETAIL);
                 intent.putExtra(Constants.INFO_ID, "111111");
                 startActivity(intent);
             }
         });
+
         JSONArray jsonArray = null;
         try {
             String ss = "{'title':'hello 1', 'time':'2013-1-2'}, {'title':'title 2', 'time':'2012-1-1'}, {'title':'title 4444', 'time':'2001-2-2'}, ";

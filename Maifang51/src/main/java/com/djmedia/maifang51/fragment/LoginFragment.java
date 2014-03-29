@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.MainActivity;
-import com.djmedia.maifang51.tools.FID;
+import com.djmedia.maifang51.tools.Constants;
 import com.djmedia.maifang51.tools.Utils;
 
 /**
@@ -27,6 +27,12 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getActionBar().setTitle(getString(R.string.login));
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -35,9 +41,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Utils.makeUserOnLine(getActivity());
-//                FragmentManager manager = getActivity().getSupportFragmentManager();
-//                manager.beginTransaction().replace(R.id.id_main_fragment, new MemberCenterFragment()).commit();
-                ((MainActivity) getActivity()).checkTag(FID.LOGIN.getId());
+                ((MainActivity) getActivity()).checkTagAndRefresh(Constants.MEMBER_CENTER);
                 Toast.makeText(getActivity(), "Login success.", Toast.LENGTH_SHORT).show();
             }
        });

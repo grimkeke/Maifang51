@@ -17,7 +17,7 @@ import android.widget.ViewFlipper;
 
 import com.djmedia.maifang51.R;
 
-public class SlideImageFragment extends Fragment implements View.OnTouchListener {
+public class SlideImageFragment extends Fragment {
     private static final String TAG = SlideImageFragment.class.getSimpleName();
     private ViewFlipper mViewFlipper;
     private TextView mTextView;
@@ -36,7 +36,32 @@ public class SlideImageFragment extends Fragment implements View.OnTouchListener
         mTextView = (TextView) view.findViewById(R.id.id_top_message);
         imageResId = new int[] {R.drawable.img0, R.drawable.img1, R.drawable.img2, R.drawable.img3, R.drawable.img4};
         titles = new String[] {"test1", "test2", "test3", "test4", "test5"};
-        mViewFlipper.setOnTouchListener(this);
+        mViewFlipper.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                switch (motionEvent.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        mDx = motionEvent.getX();
+                        return true;
+                    case MotionEvent.ACTION_MOVE:
+                        return true;
+                    case MotionEvent.ACTION_UP:
+                        float newX = motionEvent.getX();
+                        float diffX = newX - mDx;
+                        mDx = 0.0f;
+                        if (diffX > 0) {
+                            showPrev();
+                        } else {
+                            showNext();
+                        }
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+
+        });
         return view;
     }
 
@@ -44,30 +69,6 @@ public class SlideImageFragment extends Fragment implements View.OnTouchListener
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         showSlideImages();
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mDx = motionEvent.getX();
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                return true;
-            case MotionEvent.ACTION_UP:
-                float newX = motionEvent.getX();
-                float diffX = newX - mDx;
-                mDx = 0.0f;
-                if (diffX > 0) {
-                    showPrev();
-                } else {
-                    showNext();
-                }
-                return true;
-            default:
-                break;
-        }
-        return false;
     }
 
     private void showSlideImages() {

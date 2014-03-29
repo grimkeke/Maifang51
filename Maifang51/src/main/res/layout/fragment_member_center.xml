@@ -41,5 +41,11 @@
         android:text="我的预约"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/id_logout"
+        android:layout_below="@id/id_member_center_remind_button"
+        android:text="logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

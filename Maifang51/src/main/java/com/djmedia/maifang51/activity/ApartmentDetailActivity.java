@@ -6,11 +6,11 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.fragment.ApartmentDetailFragment;
-import com.djmedia.maifang51.fragment.ApartmentListFragment;
+import com.djmedia.maifang51.fragment.SearchApartmentFragment;
 import com.djmedia.maifang51.fragment.SlideImageFragment;
 
 public class ApartmentDetailActivity extends ActionBarActivity {
-    private static final String TAG = ApartmentListFragment.class.getSimpleName();
+    private static final String TAG = SearchApartmentFragment.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
