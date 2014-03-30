@@ -25,6 +25,7 @@ public class BizInfoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_info_detail, container, false);
         titleTextView = (TextView) view.findViewById(R.id.detail_title);
         contentTextView = (TextView) view.findViewById(R.id.detail_author);
+        getActivity().getActionBar().setTitle(getString(R.string.project_info));
         return view;
     }
 
@@ -34,6 +35,6 @@ public class BizInfoFragment extends Fragment {
 
         String infoId = getArguments().getString(Constants.INFO_ID);
         titleTextView.setText(infoId);
-        contentTextView.setText("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+        contentTextView.setText("biz infoXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
     }
 }

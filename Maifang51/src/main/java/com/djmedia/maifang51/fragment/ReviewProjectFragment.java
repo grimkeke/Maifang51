@@ -23,8 +23,8 @@ import java.util.Arrays;
 /**
  * Created by rd on 14-3-15.
  */
-public class SearchApartmentFragment extends ObjListFragment {
-    private static final String TAG = SearchApartmentFragment.class.getSimpleName();
+public class ReviewProjectFragment extends ObjListFragment {
+    private static final String TAG = ReviewProjectFragment.class.getSimpleName();
 
     protected ExpandTabView expandTabView;
     protected ArrayList<View> mViewArray = new ArrayList<View>();
@@ -32,7 +32,7 @@ public class SearchApartmentFragment extends ObjListFragment {
     protected PopDualListView viewMiddle;
     protected PopListView viewRight;
 
-    public SearchApartmentFragment() {
+    public ReviewProjectFragment() {
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SearchApartmentFragment extends ObjListFragment {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().getActionBar().setTitle(getString(R.string.looking_for_apartment));
+        getActivity().getActionBar().setTitle(getString(R.string.review_project));
     }
 
     @Override

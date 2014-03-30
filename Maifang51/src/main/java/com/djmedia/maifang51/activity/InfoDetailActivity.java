@@ -8,16 +8,18 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.djmedia.maifang51.R;
+import com.djmedia.maifang51.fragment.ApartmentDetailFragment;
 import com.djmedia.maifang51.fragment.BizInfoFragment;
-import com.djmedia.maifang51.fragment.InfoDetailFragment;
-import com.djmedia.maifang51.fragment.SalesMissionFragment;
-import com.djmedia.maifang51.fragment.SearchApartmentFragment;
 import com.djmedia.maifang51.fragment.CalculatorFragment;
 import com.djmedia.maifang51.fragment.CommunityFragment;
+import com.djmedia.maifang51.fragment.InfoDetailFragment;
 import com.djmedia.maifang51.fragment.MapFragment;
 import com.djmedia.maifang51.fragment.MemberSpecialFragment;
 import com.djmedia.maifang51.fragment.MineProjectFragment;
+import com.djmedia.maifang51.fragment.RegisterFragment;
 import com.djmedia.maifang51.fragment.ReminderFragment;
+import com.djmedia.maifang51.fragment.ReviewProjectFragment;
+import com.djmedia.maifang51.fragment.SalesMissionFragment;
 import com.djmedia.maifang51.tools.Constants;
 
 /**
@@ -35,7 +37,7 @@ public class InfoDetailActivity extends BaseActivity {
         progressBar.setIndeterminate(false);
         progressBar.setVisibility(View.GONE);
 
-        int detailType = getIntent().getIntExtra(Constants.DETAIL_TYPE, Constants.TYPE_SPECIAL);
+        int detailType = getIntent().getIntExtra(Constants.DETAIL_TYPE, Constants.TYPE_INFO_DETAIL);
         Log.d(TAG, "get type: " + detailType);
 
         Fragment fragment = null;
@@ -51,7 +53,7 @@ public class InfoDetailActivity extends BaseActivity {
                 fragment = new ReminderFragment();
                 break;
             case Constants.TYPE_REVIEW_PROJECT:
-                fragment = new SearchApartmentFragment();
+                fragment = new ReviewProjectFragment();
                 break;
             case Constants.TYPE_COMMUNITY:
                 fragment = new CommunityFragment();
@@ -73,6 +75,12 @@ public class InfoDetailActivity extends BaseActivity {
             case Constants.TYPE_SALES_MISSION:
                 fragment = new SalesMissionFragment();
                 fragment.setArguments(getIntent().getExtras());
+                break;
+            case Constants.TYPE_APARTMENT_DETAIL:
+                fragment = new ApartmentDetailFragment();
+                break;
+            case Constants.TYPE_REGISTER:
+                fragment = new RegisterFragment();
                 break;
             default:
                 throw new IllegalArgumentException();

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/id_register_hint"
+        android:text="@string/register"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/id_register_name"
+        android:layout_below="@id/id_register_hint"
+        android:hint="请输入姓名"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/id_register_password"
+        android:hint="请输入密码"
+        android:layout_below="@id/id_register_name"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/id_register_password_re"
+        android:hint="请重复输入密码"
+        android:layout_below="@id/id_register_password"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/id_register_uid"
+        android:hint="请输入工号"
+        android:layout_below="@id/id_register_password_re"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/id_register_upload"
+        android:layout_below="@id/id_register_uid"
+        android:layout_alignLeft="@id/id_register_uid"
+        android:layout_marginBottom="10dp"
+        android:text="工作证上传"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/id_register_uploaded_image"
+        android:layout_below="@id/id_register_uid"
+        android:layout_toRightOf="@id/id_register_upload"
+        android:src="@drawable/action_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/id_register_button"
+        android:layout_below="@id/id_register_upload"
+        android:text="@string/register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

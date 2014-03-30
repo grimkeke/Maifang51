@@ -20,8 +20,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.djmedia.maifang51.R;
-import com.djmedia.maifang51.activity.ApartmentDetailActivity;
 import com.djmedia.maifang51.activity.BaseActivity;
+import com.djmedia.maifang51.activity.InfoDetailActivity;
 import com.djmedia.maifang51.adapter.JSONAdapter;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -64,6 +64,20 @@ public class ObjListFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_obj_list, container, false);
     }
 
+    public void onObjItemClicked(int position) {
+        Log.d(TAG, "onObjItemClicked called at position: " + position);
+        JSONObject jsonObject = (JSONObject) adapter.getItem(position);
+        String coverId = jsonObject.optString("cover_i", "");
+        String title = jsonObject.optString("title", "");
+        String author = jsonObject.optString("author_name", "");
+
+        Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
+        intent.putExtra("coverId", coverId);
+        intent.putExtra("title", title);
+        intent.putExtra("author", author);
+        startActivity(intent);
+    }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -73,18 +87,8 @@ public class ObjListFragment extends Fragment {
         mainListView.setAdapter(adapter);
         mainListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d(TAG, "position: " + i);
-                JSONObject jsonObject = (JSONObject) adapter.getItem(i);
-                String coverId = jsonObject.optString("cover_i", "");
-                String title = jsonObject.optString("title", "");
-                String author = jsonObject.optString("author_name", "");
-
-                Intent detailIntent = new Intent(getActivity(), ApartmentDetailActivity.class);
-                detailIntent.putExtra("coverId", coverId);
-                detailIntent.putExtra("title", title);
-                detailIntent.putExtra("author", author);
-                startActivity(detailIntent);
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                ObjListFragment.this.onObjItemClicked(position);
             }
         });
         mainListView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -96,7 +100,6 @@ public class ObjListFragment extends Fragment {
                 int itemsLastIndex = adapter.getCount() - 1;
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE && visibleLastIndex == itemsLastIndex) {
                     offset = itemsLastIndex;
-                    Log.d(TAG, "begin loading, offset: " + offset + " limit: " + limit);
                     queryBooks(queryStr, offset, limit);
                 }
             }

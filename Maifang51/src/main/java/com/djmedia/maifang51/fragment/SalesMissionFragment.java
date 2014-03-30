@@ -27,6 +27,7 @@ public class SalesMissionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sales_mission, container, false);
+        getActivity().getActionBar().setTitle(getString(R.string.sales_mission));
         return view;
     }
 

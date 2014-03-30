@@ -255,9 +255,7 @@ public class MapFragment extends Fragment {
             locData.accuracy = location.getRadius();   //如果不显示定位精度圈，将accuracy赋值为0即可
             locData.direction = location.getDerect(); // 可以设置 locData的方向信息, 如果定位SDK未返回方向
             myLocationOverlay.setData(locData);  //更新定位数据
-            if (mMapView != null) {
-                mMapView.refresh();     //更新图层数据执行刷新后生效
-            }
+            mMapView.refresh();     //更新图层数据执行刷新后生效
 
             if (isRequest || isFirstLoc){
                 mMapView.getController().animateTo(new GeoPoint((int) (locData.latitude * 1e6), (int) (locData.longitude * 1e6)));

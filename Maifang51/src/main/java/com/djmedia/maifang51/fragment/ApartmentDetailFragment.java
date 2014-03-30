@@ -50,8 +50,6 @@ public class ApartmentDetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
-
         ImageView imageView = (ImageView) getActivity().findViewById(R.id.img_cover);
         TextView titleTextView = (TextView) getActivity().findViewById(R.id.detail_title);
         TextView authorTextView = (TextView) getActivity().findViewById(R.id.detail_author);
