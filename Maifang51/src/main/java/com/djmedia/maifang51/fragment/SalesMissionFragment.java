@@ -27,6 +27,13 @@ public class SalesMissionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_sales_mission, container, false);
+        nameTextView = (TextView) view.findViewById(R.id.id_project_name);
+        timeTextView = (TextView) view.findViewById(R.id.id_project_time);
+        clientTextView = (TextView) view.findViewById(R.id.id_project_client);
+        expireTextView = (TextView) view.findViewById(R.id.id_project_expire);
+        goalTextView = (TextView) view.findViewById(R.id.id_project_goal);
+        descriptionTextView = (TextView) view.findViewById(R.id.id_project_description);
+
         getActivity().getActionBar().setTitle(getString(R.string.sales_mission));
         return view;
     }
@@ -36,13 +43,6 @@ public class SalesMissionFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         String infoId = getArguments().getString(Constants.INFO_ID);
-
-        nameTextView = (TextView) getActivity().findViewById(R.id.id_project_name);
-        timeTextView = (TextView) getActivity().findViewById(R.id.id_project_time);
-        clientTextView = (TextView) getActivity().findViewById(R.id.id_project_client);
-        expireTextView = (TextView) getActivity().findViewById(R.id.id_project_expire);
-        goalTextView = (TextView) getActivity().findViewById(R.id.id_project_goal);
-        descriptionTextView = (TextView) getActivity().findViewById(R.id.id_project_description);
         nameTextView.setText("项目名称： " + "万科梦想园");
         timeTextView.setText("项目日期： " + "2014-01-11");
         clientTextView.setText("客户名称： " + "万科");

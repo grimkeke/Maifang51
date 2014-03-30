@@ -4,14 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ListView
-        android:id="@+id/id_mine_project_list_view"
+    <EditText
+        android:hint="请输入项目名"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" />
     <Button
-        android:id="@+id/id_mine_project_button"
-        android:text="编写项目"
+        android:id="@+id/id_confirm_project_button"
+        android:text="@string/create_project"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>

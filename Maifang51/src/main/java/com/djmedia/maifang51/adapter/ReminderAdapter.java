@@ -14,8 +14,8 @@ import org.json.JSONObject;
 /**
  * Created by rd on 14-3-20.
  */
-public class InfoAdapter extends JSONAdapter {
-    public InfoAdapter(Context context, LayoutInflater inflater, String url) {
+public class ReminderAdapter extends JSONAdapter {
+    public ReminderAdapter(Context context, LayoutInflater inflater, String url) {
         super(context, inflater, url);
     }
 
@@ -23,12 +23,12 @@ public class InfoAdapter extends JSONAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if (view == null) {
-            view = mInflater.inflate(R.layout.info_list_item, null);
+            view = mInflater.inflate(R.layout.obj_list_item, null);
 
             holder = new ViewHolder();
-            holder.imgView = (ImageView) view.findViewById(R.id.id_info_type_img);
-            holder.titleTextView = (TextView) view.findViewById(R.id.id_info_title);
-            holder.timeTextView = (TextView) view.findViewById(R.id.id_submit_time);
+            holder.imgView = (ImageView) view.findViewById(R.id.img_thumbnail);
+            holder.titleTextView = (TextView) view.findViewById(R.id.text_title);
+            holder.contentTextView = (TextView) view.findViewById(R.id.text_content);
 
             view.setTag(holder);
         } else {
@@ -39,17 +39,17 @@ public class InfoAdapter extends JSONAdapter {
         if (jsonObject.has("image")) {
 
         } else {
-            holder.imgView.setImageResource(android.R.drawable.btn_star);
+            holder.imgView.setImageResource(android.R.drawable.ic_menu_search);
         }
         holder.titleTextView.setText(jsonObject.optString("title", ""));
-        holder.timeTextView.setText(jsonObject.optString("time", ""));
+        holder.contentTextView.setText(jsonObject.optString("content", ""));
 
         return view;
     }
 
     private class ViewHolder {
-        public ImageView imgView;
         public TextView titleTextView;
-        public TextView timeTextView;
+        public TextView contentTextView;
+        public ImageView imgView;
     }
 }

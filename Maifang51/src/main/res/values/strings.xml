@@ -27,6 +27,9 @@
     <string name="my_project">我的项目</string>
     <string name="my_inbox">我的信箱</string>
     <string name="my_reminder">我的预约</string>
+    <string name="create_project">创建项目</string>
+    <string name="create_reminder">创建备忘</string>
+    <string name="update_reminder">修改备忘</string>
 
     <string name="project_info">企业公告</string>
     <string name="sales_mission">销售任务</string>

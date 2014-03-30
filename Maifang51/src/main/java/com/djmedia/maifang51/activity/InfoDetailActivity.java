@@ -12,6 +12,8 @@ import com.djmedia.maifang51.fragment.ApartmentDetailFragment;
 import com.djmedia.maifang51.fragment.BizInfoFragment;
 import com.djmedia.maifang51.fragment.CalculatorFragment;
 import com.djmedia.maifang51.fragment.CommunityFragment;
+import com.djmedia.maifang51.fragment.CreateProjectFragment;
+import com.djmedia.maifang51.fragment.CreateReminderFragment;
 import com.djmedia.maifang51.fragment.InfoDetailFragment;
 import com.djmedia.maifang51.fragment.MapFragment;
 import com.djmedia.maifang51.fragment.MemberSpecialFragment;
@@ -81,6 +83,13 @@ public class InfoDetailActivity extends BaseActivity {
                 break;
             case Constants.TYPE_REGISTER:
                 fragment = new RegisterFragment();
+                break;
+            case Constants.TYPE_CREATE_PROJECT:
+                fragment = new CreateProjectFragment();
+                break;
+            case Constants.TYPE_CREATE_REMIND:
+                fragment = new CreateReminderFragment();
+                fragment.setArguments(getIntent().getExtras());
                 break;
             default:
                 throw new IllegalArgumentException();

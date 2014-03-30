@@ -47,6 +47,7 @@ public class ObjListFragment extends Fragment {
     protected ListView mainListView;
     protected ProgressBar progressBar;
     protected String queryStr = "help";
+    private boolean isQuerying = false;
 
     public ObjListFragment() {
     }
@@ -124,6 +125,7 @@ public class ObjListFragment extends Fragment {
         Log.d(TAG, "query string: " + urlString);
         AsyncHttpClient client = new AsyncHttpClient();
         progressBar.setVisibility(View.VISIBLE);
+        isQuerying = true;
 
         client.get(QUERY_URL + urlString, new JsonHttpResponseHandler() {
             @Override
@@ -135,6 +137,7 @@ public class ObjListFragment extends Fragment {
 //                adapter.updateData(docs);
                     adapter.addData(docs);
                     progressBar.setVisibility(View.GONE);
+                    isQuerying = false;
                 }
             }
 
@@ -144,6 +147,7 @@ public class ObjListFragment extends Fragment {
                     Toast.makeText(getActivity(), "Error: " + statusCode + " " + throwable.getMessage(), Toast.LENGTH_LONG).show();
                     Log.e(TAG, statusCode + " " + throwable.getMessage());
                     progressBar.setVisibility(View.GONE);
+                    isQuerying = false;
                 }
             }
         });
@@ -159,14 +163,31 @@ public class ObjListFragment extends Fragment {
         MenuItem item = menu.findItem(R.id.menu_item_search);
 
         SearchView searchView = (SearchView) item.getActionView();
-        if (searchView != null) {
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        }
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+//        if (searchView != null) {
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+//        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Log.d(TAG, "item called");
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isQuerying) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (progressBar != null && isQuerying) {
+            progressBar.setVisibility(View.GONE);
+        }
+        super.onPause();
     }
 }

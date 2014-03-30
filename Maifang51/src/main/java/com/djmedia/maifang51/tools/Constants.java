@@ -38,4 +38,6 @@ public class Constants {
     public static final int TYPE_SALES_MISSION = 10;
     public static final int TYPE_APARTMENT_DETAIL = 11;
     public static final int TYPE_REGISTER = 12;
+    public static final int TYPE_CREATE_PROJECT = 13;
+    public static final int TYPE_CREATE_REMIND = 14;
 }

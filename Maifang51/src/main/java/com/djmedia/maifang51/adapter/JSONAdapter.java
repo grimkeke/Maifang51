@@ -56,7 +56,7 @@ public class JSONAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.thumbnailImageView = (ImageView) view.findViewById(R.id.img_thumbnail);
             holder.titleTextView = (TextView) view.findViewById(R.id.text_title);
-            holder.authorTextView = (TextView) view.findViewById(R.id.text_author);
+            holder.authorTextView = (TextView) view.findViewById(R.id.text_content);
 
             view.setTag(holder);
         } else {
@@ -128,7 +128,7 @@ public class JSONAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    private static class ViewHolder {
+    private class ViewHolder {
         public ImageView thumbnailImageView;
         public TextView titleTextView;
         public TextView authorTextView;

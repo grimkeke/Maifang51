@@ -4,13 +4,16 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="我的预约"
-        android:layout_width="match_parent"
-        android:layout_height="60dp" />
     <ListView
-        android:id="@+id/id_reminder_list_view"
+        android:id="@+id/id_main_listview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+    <Button
+        android:id="@+id/id_create_reminder_button"
+        android:text="@string/create_reminder"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
