@@ -10,7 +10,9 @@ import android.widget.Button;
 
 import com.djmedia.maifang51.R;
 import com.djmedia.maifang51.activity.InfoDetailActivity;
+import com.djmedia.maifang51.activity.MainActivity;
 import com.djmedia.maifang51.tools.Constants;
+import com.djmedia.maifang51.tools.Utils;
 
 public class MoreFragment extends Fragment {
     private static final String TAG = MoreFragment.class.getSimpleName();
@@ -41,9 +43,13 @@ public class MoreFragment extends Fragment {
         mReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
-                intent.putExtra(Constants.DETAIL_TYPE, Constants.TYPE_REVIEW_PROJECT);
-                startActivity(intent);
+                if (Utils.isUserOnLine(getActivity())) {
+                    Intent intent = new Intent(getActivity(), InfoDetailActivity.class);
+                    intent.putExtra(Constants.DETAIL_TYPE, Constants.TYPE_REVIEW_PROJECT);
+                    startActivity(intent);
+                } else {
+                    ((MainActivity) getActivity()).checkTagAndRefresh(Constants.MEMBER_CENTER);
+                }
             }
         });
 
